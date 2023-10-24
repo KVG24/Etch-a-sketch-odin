@@ -9,6 +9,18 @@
 </head>
 <body>
     <div class="container"></div>
-    <button id="clear">CLEAR</button>
+    <div class="buttons">
+        <button onclick="changeColor('red')" class="btn red">Red</button>
+        <button onclick="changeColor('yellow')" class="btn yellow">Yellow</button>
+        <button onclick="changeColor('blue')" class="btn blue">Blue</button>
+        <button onclick="changeColor('green')" class="btn green">Green</button>
+        <button onclick="changeColor('black')" class="btn black">Black</button>
+        <button onclick="changeColor('random')" class="btn random">Random</button>
+        <button onclick="changeColor('rgb(201, 201, 201)')" class="btn erase">Erase</button>
+    </div>
+    <div class="board-action">
+        <button onclick="clear()" class="action clear">Clear Board</button>
+        <button onclick="generateNew()" class="action">Custom board size</button>
+    </div>    
 </body>
 </html>
