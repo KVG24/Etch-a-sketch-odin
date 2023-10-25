@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
-const divColor = 'rgb(201, 201, 201)'
+const divColor = 'rgb(255, 255, 255, 1)'
 const clearBtn = document.getElementById('clr-btn');
+const shadingBtn = document.getElementById('shading');
 let paintColor = 'black';
 
 function generateGrid(num) {
@@ -11,7 +12,6 @@ function generateGrid(num) {
         newDiv.className = 'divs';
         newDiv.style.width = divWidth;
         newDiv.style.height = divHeigth;
-        newDiv.setAttribute('draggable', false);
         container.appendChild(newDiv);
         newDiv.addEventListener('mouseover', color)
     }
@@ -40,15 +40,24 @@ function clear() {
 
 clearBtn.addEventListener('click', clear);
 
-function color() {
-    if (paintColor === 'random') {
-    this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    } else {
-    this.style.backgroundColor = paintColor;
-    }
-};
-
 function changeColor(newColor) {
     paintColor = newColor;
 }
 
+function color() {
+    if (paintColor === 'random') {
+        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else if (paintColor === 'shading') {
+            let currentOpacity = Number(this.style.backgroundColor.slice(-4, -1));
+            if (currentOpacity <= 0.9) {
+                this.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
+                this.classList.add('shade');
+            } else if (this.classList == 'shade' && this.style.backgroundColor == 'rgb(0, 0, 0)') {
+                return;
+            } else {
+                this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+        }
+    } else {
+        this.style.backgroundColor = paintColor;
+    }
+};
