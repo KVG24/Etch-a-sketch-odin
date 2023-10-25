@@ -10,14 +10,13 @@
 <body>
     <div class="container"></div>
     <div class="buttons">
-        <button onclick="changeColor('red')" class="btn red">Red</button>
-        <button onclick="changeColor('yellow')" class="btn yellow">Yellow</button>
-        <button onclick="changeColor('blue')" class="btn blue">Blue</button>
-        <button onclick="changeColor('green')" class="btn green">Green</button>
-        <button onclick="changeColor('black')" class="btn black">Black</button>
-        <button onclick="changeColor('shading')" class="btn shading">Shading</button>
-        <button onclick="changeColor('random')" class="btn random">Random</button>
-        <button onclick="changeColor('rgb(201, 201, 201)')" class="btn erase">Eraser</button>
+        <div class="pick-container">
+            <button onclick="changeMode('pick')" class="pick-btn" value="#333333">Custom Color Mode</button>
+            <input type="color" name="color" id="color-pick">
+        </div>
+        <button onclick="changeMode('shading')" class="btn shading">Shading</button>
+        <button onclick="changeMode('random')" class="btn random">Random</button>
+        <button onclick="changeMode('rgba(255, 255, 255, 0.999)')" class="btn erase">Eraser</button>
     </div>
     <div class="board-action">
         <button id="clr-btn" class="action clear">Clear Board</button>

@@ -1,8 +1,9 @@
 const container = document.querySelector('.container');
-const divColor = 'rgb(255, 255, 255, 1)'
+const divColor = 'rgba(255, 255, 255, 0.999)'
 const clearBtn = document.getElementById('clr-btn');
 const shadingBtn = document.getElementById('shading');
-let paintColor = 'black';
+const colorPick = document.getElementById('color-pick')
+let paintMode = colorPick.value;
 
 function generateGrid(num) {
     let divWidth = 50 / num + 'rem';
@@ -13,7 +14,7 @@ function generateGrid(num) {
         newDiv.style.width = divWidth;
         newDiv.style.height = divHeigth;
         container.appendChild(newDiv);
-        newDiv.addEventListener('mouseover', color)
+        newDiv.addEventListener('mouseover', changeColor)
     }
     container.addEventListener('contextmenu', (event) => {event.preventDefault()});
 }
@@ -40,24 +41,30 @@ function clear() {
 
 clearBtn.addEventListener('click', clear);
 
-function changeColor(newColor) {
-    paintColor = newColor;
+function changeMode(mode) {
+    paintMode = mode;
 }
 
-function color() {
-    if (paintColor === 'random') {
+function changeColor() {
+    if (paintMode === 'random') {
         this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    } else if (paintColor === 'shading') {
-            let currentOpacity = Number(this.style.backgroundColor.slice(-4, -1));
-            if (currentOpacity <= 0.9) {
-                this.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
-                this.classList.add('shade');
-            } else if (this.classList == 'shade' && this.style.backgroundColor == 'rgb(0, 0, 0)') {
-                return;
-            } else {
-                this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    } else if (paintMode === 'shading') {
+        if (this.style.backgroundColor.match(/rgba/)) {    
+            let opacity = Number(this.style.backgroundColor.slice(-4, -1));
+            if (opacity < 0.9) {
+                this.style.backgroundColor = `rgba(0, 0, 0, ${opacity + 0.1})`;
+            }
+            if (this.style.backgroundColor === 'rgb(0, 0, 0)') {
+                for (const divs of container) {
+                    divs.removeEventListener('click', changeColor)
+                }
+            }
+        } else {
+            this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
         }
+    } else if (paintMode === 'pick') {
+        this.style.backgroundColor = colorPick.value
     } else {
-        this.style.backgroundColor = paintColor;
+        this.style.backgroundColor = paintMode;
     }
 };
