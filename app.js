@@ -2,15 +2,19 @@ const container = document.querySelector('.container');
 const divColor = 'rgba(255, 255, 255, 0.999)'
 const clearBtn = document.getElementById('clr-btn');
 const shadingBtn = document.getElementById('shading');
-const colorPick = document.getElementById('color-pick')
+const colorPick = document.getElementById('color-pick');
+const bordersBtn = document.getElementById('borders');
 let paintMode = colorPick.value;
+let borders = true;
+
 
 function generateGrid(num) {
     let divWidth = 50 / num + 'rem';
     let divHeigth = 50 / num + 'rem';
     for (i = 0; i < (num * num); i++) {
         let newDiv = document.createElement('div');
-        newDiv.className = 'divs';
+        newDiv.classList.add('divs')
+        newDiv.classList.add('border')
         newDiv.style.width = divWidth;
         newDiv.style.height = divHeigth;
         container.appendChild(newDiv);
@@ -32,6 +36,10 @@ function generateNew() {
     }
 }
 
+function changeMode(mode) {
+    paintMode = mode;
+}
+
 function clear() {
     let cells = container.querySelectorAll('div');
     for (const cell of cells) {
@@ -41,9 +49,25 @@ function clear() {
 
 clearBtn.addEventListener('click', clear);
 
-function changeMode(mode) {
-    paintMode = mode;
-}
+
+function enableBorders() {
+    if (borders == true) {
+        borders = false
+        let cells = container.querySelectorAll('div');
+        for (const cell of cells) {
+            cell.classList.remove('border'); 
+        }
+    } else {
+        borders = true
+        let cells = container.querySelectorAll('div');
+        for (const cell of cells) {
+            cell.classList.add('border');
+        }
+    }
+};
+
+bordersBtn.addEventListener('click', enableBorders);
+
 
 function changeColor() {
     if (paintMode === 'random') {
