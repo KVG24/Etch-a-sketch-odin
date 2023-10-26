@@ -101,6 +101,16 @@ input[type='color']::-webkit-color-swatch {
     translate: 0px -3px;
 }
 
+input[type='color']::-moz-color-swatch {
+    width: 3rem;
+    height: 2.5rem;
+    border-radius: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: 0px 7px 0px rgb(158, 158, 158);
+    translate: 0px -3px;
+    margin-left: 0.7rem;
+}
+
 .shading {
     color: white;
     background-color: rgba(255, 255, 255, 0.356);
