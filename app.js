@@ -1,5 +1,5 @@
 const container = document.querySelector('.container');
-const divColor = 'rgba(255, 255, 255, 0.999)'
+const divColor = 'rgba(255, 255, 255, 1)'
 const clearBtn = document.getElementById('clr-btn');
 const shadingBtn = document.getElementById('shading');
 const colorPick = document.getElementById('color-pick');
